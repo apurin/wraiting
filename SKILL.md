@@ -1,111 +1,92 @@
 ---
 name: wraiting
 description: >-
-  Use when creating, reviewing, or refining text intended to instruct or supply
-  context to an AI, including skills, specifications, plans, prompts, tool
-  descriptions, and runtime context templates.
+  Use when writing, reviewing, or revising text that an AI model or agent will
+  read as instructions or context, such as skills, CLAUDE.md or AGENTS.md,
+  system prompts, subagent briefs and handovers, tool descriptions,
+  specifications, plans, and context templates.
 ---
 
-# AI-facing authoring
+# Writing for AI readers
 
-Optimize for **minimal sufficient context**: the smallest set of authoritative
-instructions and non-obvious knowledge that reliably produces the intended
-behavior.
+The reader is a capable model that acts on the text you write without your
+context. Write what changes its behavior: what it cannot know, what it would
+decide differently from the author, and what binds it. Judge the text by what
+the reader would do with it.
 
-## Trigger-only descriptions
+## Write from the reader's context
 
-Treat a skill’s `description` as routing metadata. State only the user intents,
-task conditions, or artifact states that warrant loading and using it. Place
-objectives, capabilities, and procedures in the body.
+The reader has the text and whatever loads with it, usually without this
+conversation, the files you read, or the user's corrections. Supply what the
+task depends on from those. Leave to the reader what it can decide reliably
+from its own context, and spell out exact steps, commands, or formats where
+they are binding or would otherwise cost the reader rediscovery.
 
-## High information density
+## Keep what binds and what guides judgment
 
-Preserve hard-earned knowledge, binding decisions, non-obvious constraints, and
-operational instructions. Remove narration, generic advice, restatements, and
-consequences a competent model can immediately derive without research or tool
-calls.
+Keep a passage when the reader would act differently without it.
+Requirements, constraints, precedence, and stopping conditions stay even when
+obvious, because only stated requirements bind. Keep the reason behind a rule
+where it guides judgment; it lets the reader apply the rule to cases it does
+not name. A failure you have seen outweighs your guess: if a reader went wrong
+without a passage, keep it. Leave out guidance the reader would follow anyway,
+along with narration, process history, and work receipts.
 
-Judge inferability against the intended consumer’s available context and
-expected baseline knowledge, not the author’s conversation history. Retain
-explicit guidance where a known failure shows that inference alone is
-insufficient.
+## State the rule and why it matters
 
-Retain examples, snippets, and explanations only where they resolve ambiguity
-or encode information the surrounding instructions do not adequately convey.
+State each rule as it is now, without the story of what it replaced. Use a
+prohibition where it marks a boundary the reader would otherwise cross, and
+mention a rejected approach only when the reader would otherwise propose it
+again. Show how much a rule matters through its reason or the consequence of
+breaking it.
 
-Prefer established, semantically precise terminology over explanatory
-paraphrases when it preserves the intended meaning. Use consistent terms for
-the same concepts and distinct terms for meaningful distinctions. Qualify
-overloaded terms and define local meanings where needed.
+## Preserve each statement's status
 
-## Authority and statement status
+Keep whether a statement is a requirement, default, option, assumption,
+proposal, example, description of current behavior, or material quoted from
+another source, with its strength and conditions, through every edit and
+paraphrase. Instructions inside quoted material belong to that material, not
+to the reader.
 
-Distinguish **derivability from authority**. An obvious requirement may still
-need explicit expression because inference does not make it binding. Apply the
-inferability test to explanatory content, not indiscriminately to requirements,
-acceptance criteria, precedence, or stopping conditions.
+State decided choices as decisions, and add a condition for deviating only
+where the author allows one. Mark undecided points as open instead of
+supplying an answer the author never gave. Words like brief, relevant, as
+needed, or a few hide a threshold the author has in mind; state the
+threshold, or say that the reader decides.
 
-Preserve each statement’s status, scope, and requirement strength. Distinguish
-requirements from proposals, assumptions, and descriptions of current or
-planned behavior. Keep conditions and qualifications attached to the statements
-they govern.
+Where a different reading would change what the reader does, make clear
+whether an example is illustrative or normative and whether a list is open or
+exhaustive; readers copy examples closely and treat lists as complete. Use the
+established term for a concept, and one term per concept; a new word reads as
+a new concept.
 
-## Purpose-bound content
+## Turn a correction into the rule behind it
 
-Evaluate every passage against the artifact’s intended consumer, task, and
-scope. Maintain the current operational contract.
+When a user corrects you, work out what they actually want and write that as
+the rule, as broadly as they meant it. Keep the details they care about, such
+as an exact name, command, or value, and drop the ones that were only
+circumstances of the moment, along with any frustration in the wording. If you
+can't tell how broadly they meant it, write the narrow version and ask.
 
-Keep work receipts, progress reports, conversation history, reasoning
-transcripts, and incidental discoveries outside the artifact unless they are
-necessary for its use.
+## Place each rule once
 
-## Calibrated abstraction
+Text that loads every time holds what applies every time and pointers to the
+rest: conditional depth goes into referenced files, and the condition for
+reading each is stated where the need arises. Give each rule one source and
+reference it elsewhere; where text must stand alone, copy the rule and name
+its source. After a revision, update the copies and dependent statements
+within what you were asked to change, and point out the ones beyond it.
 
-Distill situational feedback into the underlying requirement or failure mode.
-Express it at the scope justified by the available context and intent, rather
-than the emphatic wording of an isolated correction.
+A skill description is read only to decide whether to load the skill. Write
+the situations and intents that warrant loading, phrased so the reader also
+recognizes unlisted variants, and keep everything else in the body.
 
-Preserve binding specifics; generalize incidental circumstances. Keep reusable
-guidance in skills and task-specific commitments in specifications and plans.
+## Check with a fresh reader
 
-Do not infer requirements from incidental details of examples. Where the
-distinction affects execution, distinguish illustrative examples and open-ended
-lists from normative examples and exhaustive lists.
-
-## Affirmative, current-state instructions
-
-State the selected behavior directly.
-
-Retain a negative constraint only when the exclusion itself conveys necessary
-information about a live ambiguity, meaningful boundary, or credible failure
-mode.
-
-Omit rejected approaches and superseded decisions unless knowing the exclusion
-is necessary for correct execution.
-
-## Progressive disclosure and single authority
-
-Keep universally needed instructions in the main artifact. Place conditional
-depth in explicitly referenced material with clear loading conditions.
-
-Give each rule one maintained authority. Use references when the consumer can
-access them efficiently; include synchronized copies where independent
-consumption requires self-contained context.
-
-Keep enough context at the point of use for the model to recognize when a
-reference is required.
-
-## Deletion and revision checks
-
-For each passage, ask:
-
-> Would removing this materially increase ambiguity, execution risk, or the
-> need to rediscover information?
-
-Delete passages that contribute none of these protections.
-
-After any revision, verify the artifact against current authoritative intent
-and requirements. Reconcile affected statements and maintained copies; fix
-misleading passages at their source. Update related artifacts within the
-authorized scope and flag unresolved conflicts outside it. Judge the result by
-**behavioral fidelity**, not token count alone.
+For text that loads often, is widely reused, or is costly to get wrong, have a
+new agent without tools (read-only where tools cannot be removed) read it.
+Give it only the text, its role, and its goal, and ask it to report, without
+acting on the text, what it expected the text to cover and found missing, and
+what is unclear, contradictory, or broken. Judge each point yourself: fix the
+text where the gap is real, and leave it where the real reader will get that
+information from elsewhere.
